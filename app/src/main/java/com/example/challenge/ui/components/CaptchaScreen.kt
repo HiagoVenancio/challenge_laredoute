@@ -11,7 +11,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun CaptchaScreen(captchaUrl: String, onCaptchaComplete: () -> Unit) {
-    val successMessageCaptcha = "Verification Success... Hooray!"
+
     AndroidView(
         modifier = Modifier.fillMaxSize(),
         factory = { context ->
@@ -22,13 +22,18 @@ fun CaptchaScreen(captchaUrl: String, onCaptchaComplete: () -> Unit) {
 
                 webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, url: String?) {
-                        view?.evaluateJavascript("(function() { return document.body.innerText; })();") { result ->
-                            if (result.contains(
-                                    successMessageCaptcha,
-                                    ignoreCase = true
-                                )
-                            ) {
-                                onCaptchaComplete()
+                        view?.evaluateJavascript(
+                            """
+                            (function() {
+                                var successElement = document.querySelector('.recaptcha-success');
+                                return successElement ? successElement.textContent.trim() : null;
+                            })();
+                            """.trimIndent()
+                        ) { result ->
+                            result?.let {
+                                if (it != "null") {
+                                    onCaptchaComplete()
+                                }
                             }
                         }
                     }
