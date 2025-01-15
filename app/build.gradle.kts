@@ -81,20 +81,4 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.animation)
     implementation(libs.accompanist.navigation.animation)
-
-    implementation(libs.androidx.room.runtime)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-
-    testImplementation(libs.mockk)
-    androidTestImplementation(libs.mockk.mockk.android)
-
-    testImplementation(libs.androidx.core.testing)
-    testImplementation(libs.kotlinx.coroutines.test)
-
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
-
 }
