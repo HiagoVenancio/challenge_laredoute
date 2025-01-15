@@ -9,3 +9,12 @@
 
 ---
 
+## PS
+
+- I used the native android icons
+- I added extra seconds to the timer, it's returning a small value. (variable name on viewmodel: timeExtra)
+
+---
+
+
+
