@@ -35,7 +35,7 @@ fun StatusItem(status: RaceStatusModel, position: Int) {
     ) {
         Icon(
             contentDescription = "",
-            painter = painterResource(R.drawable.place_holder_icon),
+            painter = painterResource(R.drawable.bug_icon),
             modifier = Modifier
                 .weight(0.2f)
                 .padding(vertical = 10.dp)

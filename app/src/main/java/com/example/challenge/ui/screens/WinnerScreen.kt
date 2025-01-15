@@ -68,7 +68,7 @@ fun WinnerScreen(navController: NavHostController, name: String, color: String) 
                     .padding(vertical = 10.dp)
                     .size(60.dp)
                     .align(alignment = Alignment.CenterHorizontally),
-                painter = painterResource(id = R.drawable.place_holder_icon),
+                painter = painterResource(id = R.drawable.bug_icon),
                 contentDescription = "",
                 tint = tintColor
             )
