@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.challenge.data.repository.IRaceRepository
 import com.example.challenge.domain.model.RaceStatusModel
 import com.example.challenge.domain.model.RaceStatusResult
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,7 +36,8 @@ class MainViewModel(
     val isCaptchaOpen: StateFlow<Boolean> = _isCaptchaOpen
 
     private var raceStatusJob: Job? = null
-    private var racedurationJob: Job? = null
+
+    private var timeExtra: Int = 20
 
     init {
         fetchRaceStatus()
@@ -45,11 +45,12 @@ class MainViewModel(
     }
 
     fun fetchRaceDuration() {
-        racedurationJob = viewModelScope.launch {
+        viewModelScope.launch {
             _isLoading.value = true
             try {
                 val result = repository.getRaceDuration()
-                startCountdown(result.timeInSeconds)
+                val timeInSeconds = result.timeInSeconds.plus(timeExtra)
+                startCountdown(timeInSeconds)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
@@ -78,6 +79,7 @@ class MainViewModel(
     }
 
     fun handleCaptchaResolved() {
+        _isCaptchaOpen.value = false
         fetchRaceStatus()
     }
 
@@ -104,6 +106,5 @@ class MainViewModel(
         super.onCleared()
         resetWinner()
         raceStatusJob?.cancel()
-        racedurationJob?.cancel()
     }
 }

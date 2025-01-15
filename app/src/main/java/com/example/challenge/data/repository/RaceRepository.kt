@@ -1,7 +1,6 @@
 package com.example.challenge.data.repository
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.example.challenge.data.api.DataApi
 import com.example.challenge.data.mapper.toDomainModel
 import com.example.challenge.data.mapper.toDomainModelList
@@ -9,7 +8,6 @@ import com.example.challenge.domain.model.RaceDurationModel
 import com.example.challenge.domain.model.RaceStatusResult
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -37,7 +35,6 @@ class RaceRepository(private val api: DataApi) :
                 when (e.code()) {
                     403 -> {
                         val captchaUrl = parseCaptchaUrl(e.response()?.errorBody()?.string())
-                        Log.e("CaptchaScreen", "403: $captchaUrl")
                         shouldCallApi = false
                         emit(RaceStatusResult.CaptchaRequired(captchaUrl))
                     }

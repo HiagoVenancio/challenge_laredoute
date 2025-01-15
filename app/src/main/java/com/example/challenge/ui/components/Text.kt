@@ -12,7 +12,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TextSingleLine(value: String, color: Color = Color.Black, style: TextStyle = MaterialTheme.typography.bodySmall) {
+fun TextSingleLine(
+    value: String,
+    color: Color = Color.Black,
+    style: TextStyle = MaterialTheme.typography.bodySmall
+) {
     Text(
         color = color,
         textAlign = TextAlign.Center,

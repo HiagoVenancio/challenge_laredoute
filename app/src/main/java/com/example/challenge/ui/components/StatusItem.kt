@@ -24,7 +24,7 @@ import com.example.challenge.ui.theme.SilverColor
 @Composable
 fun StatusItem(status: RaceStatusModel, position: Int) {
     val currentPosition = position.plus(1)
-    val isTopThree = currentPosition <= 3 // For the first two items
+    val isTopThree = currentPosition <= 3
 
     Row(
         modifier = Modifier
